@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">    
     </head>
     <body>
+        {% if messages %}
+            <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+            </ul>
+        {% endif %}
         <h1>All Shows</h1>
         <p>Welcome to the TV Shows DB</p>
         <table style="width:100">
