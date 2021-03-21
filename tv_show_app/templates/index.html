@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TV Show DB</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+    </head>
+    <body>
+        <h1>All Shows</h1>
+        <p>Welcome to the TV Shows DB</p>
+        <table style="width:100">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Release Date</th>
+                <th>Network</th>
+                <th>Actions</th>
+            </tr>
+            {% for shows in shows %}
+            <tr>
+                <th>{{shows.title}}</th>
+                <th>{{shows.description}}</th>
+                <th>{{shows.releaseDate}}</th>
+                <th>{{shows.network}}</th>
+                <th>
+                    <a href="/shows/{{shows.id}}">Show</a>
+                    <a href="/shows/{{shows.id}}/edit">Edit</a>
+                    <form action="shows/{{shows.id}}/delete" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </th>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="/shows/new">Add a New Show</a>
+    </body>
+</html>
